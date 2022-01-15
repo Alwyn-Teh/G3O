@@ -1,0 +1,223 @@
+/* EDITION AA02 (REL001), ITD ACST.175 (95/05/28 21:07:52) -- OPEN */
+
+/*+*******************************************************************
+
+	Module Name:		g3oimake.imk
+
+	Copyright:			BNR Europe Limited, 1994-1995
+						Bell-Northern Research
+						Northern Telecom / NORTEL
+
+	Description:		GENIE-III Object-Oriented Framework Imake File
+
+	History:
+		Who				When				Description
+	------------	----------------	-------------------------
+	Alwyn Teh		94Q4 - 95Q2			Initial Creation
+	Alwyn Teh		12th June 1995		+O options not supported when
+										compiling on HP-MC680x0.
+										(+O1 is ok).
+
+********************************************************************-*/
+
+RELEASE	= 1.1
+VERSION	= G3O.AA02
+OPSYS	= `uname -srvm`
+
+DEFINE_VERSION = -DG3O_VERSION=\"${VERSION}\"
+
+CC		= CC +eh
+
+BOLD	= `tput bold`
+NOBOLD	= `tput sgr0`
+
+/* Set the debug options ('make' looks at CDEBUGFLAGS) if DEBUG defined */
+#ifdef DEBUG
+
+CDEBUGFLAGS	 = -g -z -DDEBUG
+G3OLIBDIRS	 = $(LIBSEARCHDIRS)
+ROGUEWAVELIB = -lrwtoolg
+USE ARCHIVES =
+
+#else /* not debug */
+CDEBUGFLAGS = -0 $${TS_HPPA:+-z} $${TS_HPPA:++Oaggressive} $${TS_HPPA:++Olimit} $${TS_HPPA:++Osize}
+G3OLIBDIRS = $(LIBSEARCHDIRS)
+ROGUEWAVELIB = -lrwtool
+USE_ARCHIVES = +A
+
+#endif
+
+CFLAGS = $(CDEBUGFLAGS) $(DEFINE_VERSION) $(IPATH)
+
+LDFLAGS = $(CFLAGS) $(G3OLIBDIRS) $(ROGUEWAVELIB) \
+			-ltcl -lslp -latp -lgal -ltbf -lgcm -lm -lcurses -lipc
+
+PROTOCOL_SRCS = g3obtupi.cxx g3octupi.cxx
+PROTOCOL_OBJS = g3obtupi.o g3octupi.o
+
+SOURCES =	g3omain.cxx \
+			g3optini.cxx g3optui.cxx g3optdec.cxx g3optenc.cxx g3optfor.cxx \
+			g3otclxx.cxx g3oatpxx.cxx g3otcluv.cxx \
+			g3odaryx.cxx g3oprmdf.cxx g3obitsx.cxx g3obbox.cxx g3osighx.cxx \
+			g3ouiini.cxx g3ouicmd.cxx g3ouivar.cxx g3ouifor.cxx g3ouvarx.cxx
+
+OBJECTS =	g3omain.o \
+			g3optini.o g3optui.o g3optdec.o g3optenc.o g3optfor.o \
+			g3otclxx.o g3oatpxx.o g3otcluv.o \
+			g3odaryx.o g3oprmdf.o g3obitsx.o g3obbox.o g3osigbx.o \
+			g3ouiini.o g3ouicmd.o g3ouivar.o g3ouifor.o g3ouvarx.o
+
+SRCS = $(SOURCES) $(PROTOCOL_SRCS)
+OBJS = $(OBJECTS) $(PROTOCOL_OBJS)
+
+		/*
+		 *	'make' (invoked without parameters) builds the subsystem
+		 *	executable(s).
+		 */
+		AllTarget (g3o)
+
+		/* 'make g3o' builds the g3o executable */
+		SingleProgramTarget(g3o,$(OBJECTS) $(PROTOCOL_OBJS),$(USE_ARCHIVES),)
+
+		StampLoadbuildDetails(g3o)
+
+all:: g3o-btup g3o-ctup
+
+g3o-btup: g3o
+		@echo $(BOLD)
+		@echo "Make Symbolic Link to g3o for BTUP..."
+		@echo $(NOBOLD)
+		$(RM) g3o-btup
+		$(LN) g3o g3o-btup
+		@echo $(BOLD)
+		@echo "G3O BTUP done"
+		@echo $(NOBOLD)
+
+g3o-ctup: g3o
+		@echo $(BOLD)
+		@echo "Make Symbolic Link to g3o for CTUP..."
+		@echo $(NOBOLD)
+		$(RM) g3o-ctup
+		$(LN) g3o g3o-ctup
+		@echo $(BOLD)
+		@echo "G3O CTUP done"
+		@echo $(NOBOLD)
+
+#ifndef DEBUG
+$(USE_ARCHIVES):
+		@echo $(BOLD)
+		@echo "Building g3o executable with +A option."
+		@echo "This causes the linker ld(1) to use only archive libraries"
+		@echo "for all occurrences of the -l option."
+		@echo "Also, the C++ run-time environment will be informed that"
+		@echo "no shared libraries will be used by the program."
+		@echo $(NOBOLD)
+#endif
+
+#ifndef DEBUG
+$(PROTOCOL_OBJS):
+		@echo $(BOLD)
+		@echo "NOTICE: Override -O (i.e. +O2) with +O1 for module $*"
+		@echo "REASON: When using -O, protocol objects may take a long time"
+		@echo "        to compile, exceed compiler resource limits, and"
+		@echo "        some optimizations may be skipped."
+		@echo $(NOBOLD)
+		$(RM) $@
+		@echo ">>>>>> Adding pls id to $<" ;	\
+		fname=` echo $< | sed -e 's/\..$$//' `; \
+		vers=`head -1 $<|awk '$$2=="EDITION"{printf "%s %s %s %s\t%s %s %s",$$3,$$4,$$5,$$6,$$7,$$8,$$10}'| tr '[A-Z]' '[a-z]'`; \
+		issue=`echo $$vers | cut -d\	-f1`; \
+		id=$${vers:='**** (******}, *** ***.***\t('`date "+%y/%m/%d %T"`') ******'}; \
+		echo "static char *whatid = \"@(#)$$fname.$$id\";" > $*.what_id.c; \
+		echo "static char *plsid = \"$$issue\";" >> $*.what_id.c ;	\
+		S(CC) $(CFLAGS) -Aa -w -c $*.what_id.c
+		$(CC) $(CFLAGS) +O1 -c $*.cxx -o $@
+		@cat $*.what_id.o >>$@
+		@$(RM) $*.what_id.*
+#endif
+
+		/*
+		 *	'make depend' puts file dependencies in the Makefile
+		 *	NOTE: make depend uses SRCS variable.
+		 */
+		DependTarget()
+
+/*
+ *	For C++ Template instantiations to work, header and source must
+ *	have same basename. Instantiated .c file in directory ptrepository
+ *	includes both for subsequent compilation prior to final linkage.
+ */
+g3odaryh.cxx: g3odaryx.cxx
+		@echo "-------------------------------------------------------"
+		@echo Template Synonym for Dynamic Array Class \(DArray\)...
+		$(RM) g3odaryh.cxx
+		$(LN) g3odaryx.cxx g3odaryh.cxx
+		@echo "-------------—----------——--------—--------------------"
+
+g3omain.cxx g3oprmdf.cxx \
+g3ouiini.cxx g3ouicmd.cxx g3ouivar.cxx: g3odaryh.cxx
+
+clean::
+		$(RM) g3o-*
+		$(RM) g3odaryh.cxx
+		$(RM) *.what_id.*
+
+#ifdef DEBUG
+
+all:: PureMessage
+
+		AllTarget (g3o_pure)
+
+		SingleProgramTarget(g3o_pure,$(OBJECTS) $(PROTOCOL_OBJS),,)
+
+PureMessage:
+		@echo $(BOLD)
+		@echo "Compile g3o with Purify and PureCoverage."
+		@echo "Edit Makefile to precede CC with purify purecov,..."
+		@echo "remove the all:: PureMessage and kill lines,
+		@echo "then make g3o_pure again."
+		@echo $(NOBOLD)
+		@kill $$$$
+
+all:: g3o-pure-btup g3o-pure-ctup
+
+g3o-pure-btup: g3o_pure
+		$(RM) g3o-pure-btup
+		$(LN) g3o_pure g3o-pure-btup
+
+g3o-pure-ctup: g3o_pure
+		$(RM) g3o-pure-ctup
+		$(LN) g3o_pure g3o-pure-ctup
+
+#endif
+
+/* If using Purify, use the following .purify file to suppress warnings. */
+all:: PurifySuppressions
+PurifySuppressions:
+		@if [ -f g3oimake.imk ] ; \						@@\
+		then \											@@\
+				grep ^suppress g3oimake.imk > .purify ;\@@\
+		fi
+/*
+\# Suppress reported frame relay calls and reads in ATP
+suppress umr Atp_CopyCallFrame
+suppress umr Atp_CopyCallFrameElems
+suppress umr Atp_DisplayManPage
+suppress umr Atp_ExecuteCallback
+suppress umr Atp_OutputPager
+suppress umr Atp_PagerCmd
+suppress umr Atp_PagingCmd
+suppress umr Atp_PrintfWordwrap
+suppress umr Atp_SelectInputAndParseParm
+suppress umr VPrintErrorDescRec
+\# Suppress reported Tcl memory leaks (Tcl v7.3)
+suppress mlk malloc; Tcl_CreateMathFunc
+suppress mlk malloc; StringCreate
+suppress mlk malloc; RebuildTable
+suppress mlk malloc; Tcl_CallWhenDeleted
+suppress plk malloc; SetupAppendBuffer
+suppress plk malloc; EnvInit
+suppress mlk malloc; EnvInit
+suppress plk malloc; InitHistory
+suppress plk malloc; RebuildTable
+*/
