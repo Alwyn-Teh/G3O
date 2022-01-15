@@ -1,0 +1,50 @@
+					 source ----------Comment---------- #code blank  code
+--------File-------- #lines	 total inline #blcks blocks lines lines density
+g3oimake.imk			225		10		5	   5	 55	  127	 43	 56.44%
+g3oatpxh.h				 85		 3		2	   1	 18	   52	 15	 61.18%
+g3obboxh.h				 55		 3		2	   1	 17	   27	 11	 49.09%
+g3obitsh.h				108		 3		2	   1	 20	   64	 24	 59.26%
+g3obtuph.h				 42		 3		2	   1	 23	   13	  6	 30.95%
+g3bctuph.h				 81		 3		2	   1	 29	   34	 18	 41.98%
+g3odaryh.h				 51		 3		2	   1	 16	   24	 11	 47.06%
+g3oetsph.h				 35		 3		2	   1	 20	   9	  6	 25.71%
+g3opdbgh.h				 37		 3		2	   1	 16	   16	  5	 43.24%
+g3opforh.h				115		 3		2	   1	 22	   68	 25	 59.13%
+g3opmdfh.h				131		 3		2	   1	 17	   80	 34	 61.07%
+g3oproth.h			   1000		 4		3	   1	 43	  795	162	 79.50%
+g3osighh.h				 53		 2		1	   1	 19	   25	  9	 47.17%
+g3oslpxh.h				 77		 3		2	   1	 16	   47	 14	 61.04%
+g3otclvh.h				 70		 2		1	   1	 20	   36	 14	 51.43%
+g3otclxh.h				 65		 3		2	   1	 23	   26	 16	 40.00%
+g3ouicmh.h				318		 3		2	   1	 22	  224	 72	 70.44%
+g3ouidbh.h				 31		 3		2	   1	 20		6	  5	 19.35%
+g3ouih.h				384		 3		2	   1	 37	  273	 74	 71.09%
+g3ouvarh.h				134		 3		2	   1	 26	   84	 24	 62.69%
+g3oatpxx.cxx			 73		 2		1	   1	 16	   43	 14	 58.90%
+g3obbox.cxx				155		 2		1	   1	 17	  105	 33	 67.74%
+g3obitsx.cxx			329		 2		1	   1	 22	  235	 72	 71.43%
+g3obtupi.cxx		   2521		 2		1	   1	 41	 2322	158	 92.11%
+g3octupi.cxx		   1487		 2		1	   1	 43	 1319	125	 88.70%
+g3odaryh.cxx			 83		 3		2	   1	 16	   56	 11	 67.47%
+g3odaryx.cxx			 83		 3		2	   1	 16	   56	 11	 67.47%
+g3oetsup.cxx			 91		 2		1	   1	 20	   66	  5	 72.53%
+g3omain.cxx				408		 6		5	   1	 32	  306	 70	 75.00%
+g3oprmdf.cxx			423		 2		1	   1	 21	  369	 33	 87.23%
+g3optdec.cxx			504		 3		2	   1	 25	  406	 73	 80.56%
+g3optenc.cxx			504		 2		1	   1	 24	  404	 76	 80.16%
+g3optfor.cxx			552		 3		2	   1	 24	  438	 90	 79.35%
+g3optini.cxx		   1237		 2		1	   1	 30	  998	209	 80.68%
+g3optui.cxx				759		 3		2	   1	 30	  565	164	 74.44%
+g3osighx.cxx			145		 2		1	   1	 19	   98	 28	 67.59%
+g3otcluv.cxx			144		 2		1	   1	 23	   93	 28	 64.58%
+g3otclxx.cxx			112		 2		1	   1	 24	   65	 23	 58.04%
+g3ouicmd.cxx		   2064		 2		1	   1	 32	 1642	390	 79.55%
+g3ouifor.cxx			449		13	   12	   1	 25	  340	 84	 75.72%
+g3ouiini.cxx		   1438		16	   10	   6	 88	 1100	250	 76.50%
+g3ouivar.cxx			409		 5		4	   1	 17	  312	 80	 76.28%
+g3ouvarx.cxx			379		 5		4	   1	 25	  281	 73	 74.14%
+* Total * ..........  17446	   152	  100	  52   1109	13649  2688	 78.24%
+---43 files total---
+
+Estimated preparation time @ 300 lines/hr (hh:mm): 45:30			
+Estimated inspection time @	200 lines/hr (hh:mm): 68:15			
