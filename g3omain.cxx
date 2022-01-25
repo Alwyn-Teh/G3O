@@ -36,7 +36,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <iostream.h>
+#include <iostream>
 
 #include <errno.h>
 #include <unistd.h>
@@ -56,6 +56,8 @@
 #include <slp.h>
 #include <atph.h>
 #include <atp2tclh.h>
+
+using namespace std;
 
 int __verbose = 0;
 int __debug = 0;

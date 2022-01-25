@@ -1,0 +1,17 @@
+ 115 
+  63 RWCString
+  35 RWCollectableString
+   8 RWHashDictionaryIterator
+   7 RWHashDictionary
+   4 RWOrdered
+   4 RWCRegexp
+   3 RWSortedVector
+   3 RWCTokenizer
+   2 RWOrderedIterator
+   2 RWHashDictionary&
+   2 FORWARD
+   1 RWSortedVectorIterator
+   1 RWSet
+   1 RWRegexp
+   1 RWCollectable
+   1 RWBitVec

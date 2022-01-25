@@ -34,6 +34,11 @@
 #include <rw/hashdict.h>
 #include <rw/ordcltn.h>
 
+#if _DEBUG_ENCODE
+#include <iostream>
+using namespace std;
+#endif
+
 void Protocol::Encode( const char *msg_type_name, user_variables *uv, bit_string *msg )
 {
 	// release any stale pointer information
@@ -71,7 +76,7 @@ void Protocol::Encode( const char *msg_type_name, user_variables *uv, bit_string
 	}
 }
 
-void Protocol:: Encode ( user_variables *uv, bit_string *msg, const char *ui_group_name )
+void Protocol::Encode( user_variables *uv, bit_string *msg, const char *ui_group_name )
 {
 	RWCollectableString group( ui_group_name );
 	GroupInfo *info = (GroupInfo *)(group_info.findValue( &group ));

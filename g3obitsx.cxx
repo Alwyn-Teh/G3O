@@ -23,7 +23,7 @@
 
 *******************************************************************-*/
 
-#include <iostream.h>
+#include <iostream>
 #include <iomanip.h>
 
 #include <stdlib.h>
@@ -32,6 +32,10 @@
 #include <string.h>
 
 #include <g3obitsh.h>
+
+#if _DEBUG_FETCH
+using namespace std;
+#endif
 
 //
 //
@@ -320,7 +324,7 @@ ostream & operator<< ( ostream &o, const bit_string &b )
 	o << "(" << dec << b.len << ")";
 
 	for ( int i=0; i<b.len; i += 8 )
-	   o << " " << setw(2) << setprecision(2) << setfill('O') << hex << (int)(b.bits[i/8]);
+	   o << " " << setw(2) << setprecision(2) << setfill('0') << hex << (int)(b.bits[i/8]);
 
 	o.fill(' '); // reset
 	o.flags( orig_flags );

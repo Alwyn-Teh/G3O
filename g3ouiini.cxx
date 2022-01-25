@@ -44,7 +44,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <iostream.h>
+#include <iostream>
 #include <fstream.h>
 #include <strstream.h>
 #include <ctype.h>
@@ -63,6 +63,8 @@
 #include <tbf.h>
 #include <gal.h>
 #include <ipc.h>
+
+using namespace std;
 
 #if _DEBUG_LOG_FILE
 static int parmtype_count [13] [8] = {0};

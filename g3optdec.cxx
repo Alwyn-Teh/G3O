@@ -35,6 +35,9 @@
 #include <rw/hashdict.h>
 #include <rw/ordcltn.h>
 
+#include <iostream>
+using namespace std;
+
 extern int __debug;
 
 void Protocol::Decode( bit_string *msg, user_variables *uv )

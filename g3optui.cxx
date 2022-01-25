@@ -38,10 +38,15 @@
 #include <g3ouvarh.h>
 
 #include <rw/cstring.h>
-#include <rw/hashdict. h>
+#include <rw/hashdict.h>
 #include <rw/ordcltn.h>
 
 static RWCString tmp_string;
+
+#if _DEBUG_BUILD_UI
+#include <iostream>
+using namespace std;
+#endif
 
 //
 //

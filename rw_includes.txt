@@ -1,0 +1,12 @@
+  13 <rw/cstring.h>
+   7 <rw/hashdict.h>
+   5 <rw/regexp.h>
+   5 <rw/ordcltn.h>
+   4 <rw/collect.h>
+   3 <rw/collstr.h>
+   2 <rw/rwset.h>
+   2 <rw/ctoken.h>
+   1 <rw/tooldefs.h>
+   1 <rw/sortvec.h>
+   1 <rw/bitvec.h>
+   1 <rw/bintree.h>

@@ -37,7 +37,7 @@
 #include <g3ouvarh.h>
 
 #include <iomanip.h>
-#include <iostream.h>
+#include <iostream>
 #include <strstream.h>
 
 #include <rw/cstring.h>

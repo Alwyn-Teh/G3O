@@ -16,9 +16,11 @@
 
 *******************************************************************-*/
 
-#include <iostream.h>
+#include <iostream>
 #include <string.h>
 #include <g3odaryh.h>
+
+using namespace std;
 
 template<class T> DArray<T>::DArray(int s) : sz(s)
 {

@@ -30,7 +30,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#include <iostream.h>
+#include <iostream>
 #include <iomanip.h>
 #include <strstream.h>
 

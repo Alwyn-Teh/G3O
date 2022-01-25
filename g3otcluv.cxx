@@ -25,11 +25,13 @@
 ********************************************************************-*/
 
 #include <malloc.h>
-#include <iostream.h>
+#include <iostream>
 #include <strstream.h>
 
 #include <g3oproth.h>
 #include <g3otclvh.h>
+
+using namespace std;
 
 user_tcl_variables::user_tcl_variables( Tcl_Interp *iptr, const char *uv_name, user_variables &uv ) : utv_name( uv_name )
 {

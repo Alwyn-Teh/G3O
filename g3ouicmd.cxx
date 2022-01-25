@@ -44,6 +44,7 @@
 #include <g3otclvh.h>
 
 #include <string.h>
+#include <iostream>
 #include <fstream.h>
 #include <strstream.h>
 
@@ -61,6 +62,8 @@
 #include <g3opmdfh.h>
 #include <g3ouvarh.h>
 #include <g3obitsh.h>
+
+using namespace std;
 
 extern "C" const char * Tbf_Video( uint8 video_code, const char *string );
 
@@ -1179,8 +1182,8 @@ int Genie3_cli::DecodeMessageHandler( int dir, int targets, int level, int msg, 
 {
 #if _DEBUG_UI_GAL
 	cerr << "DecodeMessageHandler("
-		 << " dir: " << dir << ", targets: " << targets << ", level: " << level << ", msg: " << msg << ", parm: " << parm
-		 << ")" << endl;
+			  << " dir: " << dir << ", targets: " << targets << ", level: " << level << ", msg: " << msg << ", parm: " << parm
+			  << ")" << endl;
 #endif
 
 	return cli->DecodeMessage( dir, targets, level, msg, parm );
@@ -1190,8 +1193,8 @@ int Genie3_cli::MessageActionHandler( int msg, char *action, int op )
 {
 #if _DEBUG_UI_GAL
 	cerr << "MessageActionHandler("
-		 << " msg: " << msg << ", action: " << action << ", op: " << op
-		 << ")" << endl;
+			  << " msg: " << msg << ", action: " << action << ", op: " << op
+			  << ")" << endl;
 #endif
 
 	return cli->MessageAction( msg, action, op );

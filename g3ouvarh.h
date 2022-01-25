@@ -33,7 +33,7 @@ a******************************************************************-*/
 #include <iostream.h>
 
 #include <rw/cstring.h>
-#include <rw/hashdict. h>
+#include <rw/hashdict.h>
 #include <rw/collect.h>
 #include <rw/rwset.h>
 

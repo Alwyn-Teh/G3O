@@ -35,6 +35,11 @@
 
 #include <rw/ordcltn.h>
 
+#if _DEBUG_FORMAT
+#include <iostream>
+using namespace std;
+#endif
+
 extern int __debug;
 
 inline int min( int a, int b )
@@ -152,9 +157,9 @@ void Protocol::UIGroup_Ref::Format( Protocol *p, bit_string * msg, user_variable
 	   msgs[m]->Format( p, msg, uv, pf );
 
 #if _DEBUG_FORMAT
-if ( __debug )
-	cerr << __FILE__ <<	": line " << __LINE__ << " - Done Formating UIGroup( " << variable_group
-		 << ", " << long_description << ")" << endl;
+	if ( __debug )
+	  cerr << __FILE__ <<	": line " << __LINE__ << " - Done Formating UIGroup( " << variable_group
+	  	   << ", " << long_description << ")" << endl;
 #endif
 }
 
@@ -219,7 +224,7 @@ void Protocol::LabelGroup_Ref::Format( Protocol *p, bit_string * msg, user_varia
 
 void Protocol::OptionGroup_Ref::Format( Protocol *p, bit_string *msg, user_variables *uv, ProtocolFormat * pf )
 {
-#if _DEBUG_DECODE
+#if _DEBUG_FORMAT
 	if ( __debug )
 	  cerr << "Formating OptionGroup( " << long_description << ")" << endl;
 #endif
@@ -231,7 +236,7 @@ void Protocol::OptionGroup_Ref::Format( Protocol *p, bit_string *msg, user_varia
 		for ( int m = 0; m < num_msgs; m++ )
 		   msgs[m]->Format( p, msg, uv, pf );
 
-#if _DEBUG_DECODE
+#if _DEBUG_FORMAT
 	if ( __debug )
 	  cerr << "Done Formating OptionGroup( " << long_description << ")" << endl;
 #endif
@@ -296,17 +301,17 @@ void Protocol::LengthGroup_Ref::Format( Protocol *p, bit_string * msg, user_vari
 
 #if _DEBUG_FORMAT
 	if ( __debug )
-	cerr << __FILE__ << ": line " << __LINE__
-		 << " - Done Formating LengthGroup ( "
-		 << variable_name << ", "
-		 << long_description << ")" << endl;
+	  cerr << __FILE__ << ": line " << __LINE__
+	  	   << " - Done Formating LengthGroup ( "
+		   << variable_name << ", "
+		   << long_description << ")" << endl;
 #endif
 }
 
 void Protocol::Message_Ref::Format( Protocol *p, bit_string * msg, user_variables * uv, ProtocolFormat * pf )
 {
 #if _DEBUG_FORMAT
-	if ( debug )
+	if ( __debug )
 	  cerr << __FILE__ << ": line " << __LINE__ << " - Formating Message(" << variable_name
 	  	   << ", " << long_description << ")" << endl;
 #endif

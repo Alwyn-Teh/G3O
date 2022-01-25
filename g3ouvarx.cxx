@@ -37,6 +37,11 @@
 #include <rw/collstr.h>
 #include <rw/bintree.h>
 
+#if _DEBUG_DEFINE
+#include <iostream>
+using namespace std;
+#endif
+
 //
 //
 //	Condition debug compilation is controlled by these macros
@@ -52,7 +57,7 @@
 user_variables::InternalError::InternalError( const char *m ) : message ( m )
 { }
 
-user_variables:: InternalError::InternalError( const char *m, int a )
+user_variables::InternalError::InternalError( const char *m, int a )
 {
 	char buf[128];
 	sprintf( buf, m, a );
@@ -150,7 +155,7 @@ void user_variables::define(const char *var_name, bit_string tbits, int bitwidth
 
 void user_variables::undefine( const char *var_name )
 {
-#if not _DEBUG_DEFINE
+#if _DEBUG_DEFINE
 	cout << "UnDefine " << var_name << endl;
 #endif
 
